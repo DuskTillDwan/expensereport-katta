@@ -51,6 +51,7 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
 
+    testImplementation("com.approvaltests:approvaltests:24.17.0")
     testImplementation 'io.cucumber:cucumber-java'
     testImplementation 'io.cucumber:cucumber-junit-platform-engine'
     testImplementation 'org.junit.jupiter:junit-jupiter'
