@@ -30,7 +30,7 @@ class ExpenseReportTest {
                 createExpense(ExpenseType.CAR_RENTAL, 50),
                 createExpense(ExpenseType.CAR_RENTAL, Integer.MAX_VALUE)
         );
-        report.printReport(Collections.emptyList(), new Date(0));
+        report.printReport(expenses, new Date(0));
         Approvals.verify(output);
     }
 
