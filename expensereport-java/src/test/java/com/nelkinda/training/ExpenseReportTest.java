@@ -27,6 +27,8 @@ class ExpenseReportTest {
                 createExpense(ExpenseType.DINNER, 5001),
                 createExpense(ExpenseType.BREAKFAST, 5000),
                 createExpense(ExpenseType.BREAKFAST, 5001),
+                createExpense(ExpenseType.LUNCH, 2000),
+                createExpense(ExpenseType.LUNCH, 2001),
                 createExpense(ExpenseType.CAR_RENTAL, 50),
                 createExpense(ExpenseType.CAR_RENTAL, Integer.MAX_VALUE)
         );
@@ -40,12 +42,4 @@ class ExpenseReportTest {
         expense.amount = amount;
         return expense;
     }
-/**
- * DINNER 5000,
- * DINNER 5001,
- * BREAKFAST 1000,
- * BREAKFAST 1001,
- * CAR_RENTAL 60
- * CAR_RENTAL Integer.MAX_VALUE, as there is no limit
- */
 }
