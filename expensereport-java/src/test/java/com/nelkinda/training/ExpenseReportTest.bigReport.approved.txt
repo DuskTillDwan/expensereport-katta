@@ -1,11 +1,11 @@
 Expenses Wed Dec 31 18:00:00 CST 1969
 Dinner	5000	 
 Dinner	5001	X
-Breakfast	5000	X
-Breakfast	5001	X
+Breakfast	1000	 
+Breakfast	1001	X
 Lunch	2000	 
 Lunch	2001	X
 Car Rental	50	 
 Car Rental	2147483647	 
-Meal expenses: 24003
-Total expenses: -2147459596
+Meal expenses: 16003
+Total expenses: -2147467596

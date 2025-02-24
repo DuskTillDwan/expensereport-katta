@@ -1,9 +1,9 @@
 package com.nelkinda.training;
 
 import lombok.Getter;
+import lombok.NonNull;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 enum ExpenseType {
     DINNER("Dinner", true, 5000),
@@ -47,28 +47,52 @@ class Expense {
     String getName() {
         return type.getExpenseName();
     }
+
+}
+
+class Expenses implements Iterable<Expense> {
+
+    private final List<Expense> expenseList = new ArrayList<>();
+
+    public Expenses() {
+    }
+
+    public Expenses(Expense ... expenses){
+        expenseList.addAll(Arrays.asList(expenses));
+    }
+
+    int getMealExpenses() {
+        return expenseList.stream().filter(Expense::isMeal).mapToInt(expense -> expense.amount).sum();
+    }
+
+    int getTotal() {
+        return expenseList.stream().mapToInt(expense -> expense.amount).sum();
+    }
+
+    @Override
+    @NonNull
+    public Iterator<Expense> iterator() {
+        return expenseList.iterator();
+    }
 }
 
 public class ExpenseReport {
-    public void printReport(List<Expense> expenses, Date date) {
-        int total = 0;
-        int mealExpenses = 0;
+
+    public void printReport(Expenses expenses, Date date) {
 
         System.out.println("Expenses " + date);
 
         for (Expense expense : expenses) {
-            if (expense.isMeal()) {
-                mealExpenses += expense.amount;
-            }
-
-            String expenseName = expense.getName();
-            String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
-            System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-            total += expense.amount;
+            printSingleExpense(expense);
         }
 
-        System.out.println("Meal expenses: " + mealExpenses);
-        System.out.println("Total expenses: " + total);
+        System.out.println("Meal expenses: " + expenses.getMealExpenses());
+        System.out.println("Total expenses: " + expenses.getTotal());
+    }
+
+    public void printSingleExpense(Expense expense) {
+        String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
+        System.out.println(expense.getName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
     }
 
 }
