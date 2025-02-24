@@ -1,5 +1,7 @@
 package com.nelkinda.training;
 
+import lombok.Getter;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +13,7 @@ enum ExpenseType {
 
     private final String name;
     private final Boolean meal;
+    @Getter
     private final int limit;
 
     ExpenseType(String name, Boolean meal, int limit) {
@@ -27,15 +30,23 @@ enum ExpenseType {
         return meal;
     }
 
-    boolean isOverLimit(Expense expense) {
-        return expense.amount > limit;
-    }
 }
 
 class Expense {
     ExpenseType type;
     int amount;
 
+    boolean isOverLimit() {
+        return amount > type.getLimit();
+    }
+
+    boolean isMeal() {
+        return type.isMeal();
+    }
+
+    String getName() {
+        return type.getExpenseName();
+    }
 }
 
 public class ExpenseReport {
@@ -46,12 +57,12 @@ public class ExpenseReport {
         System.out.println("Expenses " + date);
 
         for (Expense expense : expenses) {
-            if (expense.type.isMeal()) {
+            if (expense.isMeal()) {
                 mealExpenses += expense.amount;
             }
 
-            String expenseName = expense.type.getExpenseName();
-            String mealOverExpensesMarker = expense.type.isOverLimit(expense) ? "X" : " ";
+            String expenseName = expense.getName();
+            String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
             System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
             total += expense.amount;
         }
